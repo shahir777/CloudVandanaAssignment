@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width">
     <title>Survey Form</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <style>
+      /* Add a CSS style to make the values in the popup green */
+      #selected-values span {
+          color: darkgreen;
+          font-size: 25px;
+          font-family: 'Arial', sans-serif;
+          font-weight: bold;
+      }
+  </style>
 </head>
 <body>
     <div class="container">
@@ -179,11 +188,12 @@
 
           <div id="popup" class="popup">
             <div class="popup-content">
-              <span class="close" onclick="closePopup()">&times;</span>
-              <h2>Selected Values</h2>
-              <div id="selected-values"></div>
+                <span class="close" onclick="closePopup()">&times;</span>
+                <h2 style="display: flex; justify-content: center; align-items: center; height: 100%;">Given Details</h2>
+                <div id="selected-values"></div>
             </div>
-          </div>
+        </div>
+        
           
           <script>
             document.getElementById("survey-form").addEventListener("submit", function (event) {
@@ -242,14 +252,14 @@
             for (let i = 0; i < elements.length; i++) {
               const element = elements[i];
               if (element.tagName === 'INPUT' && (element.type === 'text' || element.type === 'email' || element.type === 'date' || element.type === 'number')) {
-                selectedValues.innerHTML += `<p>${element.previousElementSibling.innerText}: ${element.value}</p>`;
+                selectedValues.innerHTML += `<p>${element.previousElementSibling.innerText}: <span> ${element.value}</span> </p>`;
               }
               if (element.tagName === 'SELECT') {
                 const selectedOption = element.options[element.selectedIndex];
-                selectedValues.innerHTML += `<p>${element.previousElementSibling.innerText}: ${selectedOption.innerText}</p>`;
+                selectedValues.innerHTML += `<p>${element.previousElementSibling.innerText}: <span> ${selectedOption.innerText} </span> </p>`;
               }
               if (element.tagName === 'INPUT' && element.type === 'checkbox' && element.checked) {
-                selectedValues.innerHTML += `<p>Gender: ${element.value}</p>`;
+                selectedValues.innerHTML += `<p>Gender: <span> ${element.value} </span> </p>`;
               }
             }
 
